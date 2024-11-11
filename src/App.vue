@@ -1,12 +1,13 @@
-<!-- App section -->
 <template>
-  <div id="App" :class="typeof weather.main != 'undefined' && weather.main.temp > 16 ? 'warm' :''">
+  <div id="app" :class="typeof weather.main != 'undefined' && weather.main.temp > 16 ? 'warm' : ''">
     <main>
       <div class="search-box">
-        <input type="text" class="search-bar" 
-        placeholder="Enter City or Location..."
-        v-model="query"
-        @keypress="fetchWeather"
+        <input 
+          type="text" 
+          class="search-bar" 
+          placeholder="Search..."
+          v-model="query"
+          @keypress="fetchWeather"
         />
       </div>
 
@@ -25,7 +26,6 @@
   </div>
 </template>
 
-<!-- JavaScript Section -->
 <script>
 export default {
   name: 'app',
@@ -34,7 +34,7 @@ export default {
       api_key: '8beed40df2a396aa248799b8c3b16f40',
       url_base: 'https://api.openweathermap.org/data/2.5/',
       query: '',
-      weather: {},
+      weather: {}
     }
   },
   methods: {
@@ -65,106 +65,105 @@ export default {
 }
 </script>
 
-<!-- CSS Section -->
 <style>
-  *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-  }
+body {
+  font-family: 'montserrat', sans-serif;
+}
 
-  #app {
-    background-image: url('./components/cold-bg.jpg');
-    background-size: cover;
-    background-position: bottom;
-    transition: 0.4s;
-  }
+#app {
+  background-image: url('./components/cold-bg.jpg');
+  background-size: cover;
+  background-position: bottom;
+  transition: 0.4s;
+}
 
-  #app.warm {
-    background-image: url('./components/warm-bg.jpg');
-  }
+#app.warm {
+  background-image: url('./components/warm-bg.jpg');
+}
 
-  main {
-    min-height: 100vh;
-    padding: 25px;
+main {
+  min-height: 100vh;
+  padding: 25px;
 
-    background-color: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75));
-  }
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75));
+}
 
-  .search-box {
-    width: 100%;
-    margin-bottom: 30px;
-  }
+.search-box {
+  width: 100%;
+  margin-bottom: 30px;
+}
 
-  .search-box .search-bar {
-    display: block;
-    width: 100%;
-    padding: 15px;
-
-    color: #313131;
-    font-size: 20px;
-
-    appearance: none;
-    border: none;
-    outline: none;
-    background: none;
-
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 0px 16px 0px 16px;
-    transition: 0.4s;
-  }
-
-  .search-box .search-bar:focus {
-    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
-    background-color: rgba(255, 255, 255, 0.75);
-    border-radius: 16px 0px 16px 0px;
-  }
-
-  .location-box .location {
-    color: #080808;
-    font-size: 32px;
-    font-weight: 500;
-    text-align: center;
-    text-shadow: 1px 3px rgba(0, 0, 0, 0.25);
-  }
-
-  .location-box .date {
-    color: #030303;
-    font-size: 20px;
-    font-weight: 300;
-    text-align: center;
-    font-style: italic;
-    text-shadow: 1px 3px rgba(0, 0, 0, 0.25);
-  }
-
-  .weather-box {
-    text-align: center;
-  }
-
-  .weather-box .temp {
-    display: inline-block;
-    padding: 10px 25px;
-    color: #000000;
-    font-size: 120px;
-    font-weight: 900;
-
-    text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
-    background-color: rgba(255, 255, 255, 0.75);
-    border-radius: 16px;
-    margin: 30px 0px;
-    box-shadow: 3px 6px rgba(0, 0, 0, 0.25);
-  }
-
-  .weather-box .weather {
-    color: #ffffff;
-    font-size: 48px;
-    font-weight: 700;
-    font-style: italic;
-    text-shadow: 3xp 6px rgba(0, 0, 0, 0.75);
-  }
+.search-box .search-bar {
+  display: block;
+  width: 100%;
+  padding: 15px;
   
+  color: #313131;
+  font-size: 20px;
+
+  appearance: none;
+  border:none;
+  outline: none;
+  background: none;
+
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 0px 16px 0px 16px;
+  transition: 0.4s;
+}
+
+.search-box .search-bar:focus {
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 16px 0px 16px 0px;
+}
+
+.location-box .location {
+  color: #FFF;
+  font-size: 32px;
+  font-weight: 500;
+  text-align: center;
+  text-shadow: 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+.location-box .date {
+  color: #FFF;
+  font-size: 20px;
+  font-weight: 300;
+  font-style: italic;
+  text-align: center;
+}
+
+.weather-box {
+  text-align: center;
+}
+
+.weather-box .temp {
+  display: inline-block;
+  padding: 10px 25px;
+  color: #FFF;
+  font-size: 102px;
+  font-weight: 900;
+
+  text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
+  background-color:rgba(255, 255, 255, 0.25);
+  border-radius: 16px;
+  margin: 30px 0px;
+
+  box-shadow: 3px 6px rgba(0, 0, 0, 0.25);
+}
+
+.weather-box .weather {
+  color: #FFF;
+  font-size: 48px;
+  font-weight: 700;
+  font-style: italic;
+  text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
+}
 </style>
