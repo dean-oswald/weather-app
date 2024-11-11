@@ -1,3 +1,4 @@
+<!-- App section -->
 <template>
   <div id="App" :class="typeof weather.main != 'undefined' && weather.main.temp > 16 ? 'warm' :''">
     <main>
@@ -24,6 +25,7 @@
   </div>
 </template>
 
+<!-- JavaScript Section -->
 <script>
 export default {
   name: 'app',
@@ -63,7 +65,7 @@ export default {
 }
 </script>
 
-
+<!-- CSS Section -->
 <style>
   *{
     margin: 0;
