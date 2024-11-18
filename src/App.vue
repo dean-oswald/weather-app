@@ -12,12 +12,14 @@
       </div>
 
       <div v-if="error" class="error-notification">
-        {{ error }}
+        <span class="icon-danger">⚠️</span> {{ error }}
       </div>
 
       <div class="weather-wrap" v-if="typeof weather.main != 'undefined'">
         <div class="location-box">
-          <div class="location">{{ weather.name }}, {{ weather.sys.country }}</div>
+          <div class="location">
+            <span class="icon-location">📍</span> {{ weather.name }}, {{ weather.sys.country }}
+          </div>
           <div class="date">{{ dateBuilder() }}</div>
         </div>
 
@@ -49,7 +51,7 @@ export default {
         fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`)
           .then(res => {
             if (!res.ok) {
-              throw new Error('Location not found or not existing on Earth. Please try another place.');
+              throw new Error('Location not found. Please try another place.');
             }
             return res.json();
           })
@@ -146,6 +148,11 @@ main {
   text-shadow: 1px 3px rgba(0, 0, 0, 0.25);
 }
 
+.location-box .location .icon-location {
+  font-size: 24px;
+  margin-right: 8px;
+}
+
 .location-box .date {
   color: #FFF;
   font-size: 20px;
@@ -186,5 +193,13 @@ main {
   font-size: 18px;
   margin-bottom: 15px;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-notification .icon-danger {
+  font-size: 20px;
+  margin-right: 8px;
 }
 </style>
