@@ -11,6 +11,10 @@
         />
       </div>
 
+      <div v-if="error" class="error-notification">
+        {{ error }}
+      </div>
+
       <div class="weather-wrap" v-if="typeof weather.main != 'undefined'">
         <div class="location-box">
           <div class="location">{{ weather.name }}, {{ weather.sys.country }}</div>
@@ -34,16 +38,26 @@ export default {
       api_key: '8beed40df2a396aa248799b8c3b16f40',
       url_base: 'https://api.openweathermap.org/data/2.5/',
       query: '',
-      weather: {}
+      weather: {},
+      error: null // Added error property to store error messages
     }
   },
   methods: {
     fetchWeather (e) {
       if (e.key == "Enter") {
+        this.error = null; // Reset error message
         fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`)
           .then(res => {
+            if (!res.ok) {
+              throw new Error('Location not found. Please try another place.');
+            }
             return res.json();
-          }).then(this.setResults);
+          })
+          .then(this.setResults)
+          .catch(err => {
+            this.weather = {}; // Clear previous weather data
+            this.error = err.message; // Set error message
+          });
       }
     },
     setResults (results) {
@@ -165,5 +179,12 @@ main {
   font-weight: 700;
   font-style: italic;
   text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
+}
+
+.error-notification {
+  color: red;
+  font-size: 18px;
+  margin-bottom: 15px;
+  text-align: center;
 }
 </style>
