@@ -49,7 +49,7 @@ export default {
         fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`)
           .then(res => {
             if (!res.ok) {
-              throw new Error('Location not found. Please try another place.');
+              throw new Error('Location not found or not existing on Earth. Please try another place.');
             }
             return res.json();
           })
